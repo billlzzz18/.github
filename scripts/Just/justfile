@@ -1,0 +1,223 @@
+# bl1nk.site — Justfile
+# ติดตั้ง: cargo install just
+# ใช้: just <command>
+
+set shell := ["bash", "-c"]
+set dotenv-load := true
+
+# แสดง commands ทั้งหมด
+default:
+    @just --list
+
+# ══════════════════════════════════════════════════════
+# SETUP
+# ══════════════════════════════════════════════════════
+
+# ติดตั้ง dependencies ทั้งหมด
+install:
+    bun install
+
+# Setup ครั้งแรก (install + db setup)
+setup: install db-generate db-migrate db-seed
+    @echo "✅ Setup complete! Run 'just dev' to start"
+
+# ══════════════════════════════════════════════════════
+# DEVELOPMENT
+# ══════════════════════════════════════════════════════
+
+# รัน dev servers ทั้งหมด
+dev:
+    bun run dev
+
+# รัน Web app เท่านั้น (app.bl1nk.site)
+dev-web:
+    cd apps/web && bun run dev
+
+# รัน Marketplace
+dev-marketplace:
+    cd apps/marketplace && bun run dev
+
+# รัน API (Cloudflare Workers local)
+dev-api:
+    cd apps/api && bun run dev
+
+# รัน Desktop app
+dev-desktop:
+    cd apps/desktop && bun tauri dev
+
+# ══════════════════════════════════════════════════════
+# DATABASE
+# ══════════════════════════════════════════════════════
+
+# Generate Prisma client
+db-generate:
+    bunx prisma generate --schema=infrastructure/prisma/schema.prisma
+    @echo "✅ Prisma client generated"
+
+# สร้าง migration ใหม่
+db-migrate name="":
+    bunx prisma migrate dev --schema=infrastructure/prisma/schema.prisma --name "{{name}}"
+
+# Deploy migrations (production)
+db-migrate-prod:
+    bunx prisma migrate deploy --schema=infrastructure/prisma/schema.prisma
+
+# Seed database
+db-seed:
+    bun run infrastructure/prisma/seed.ts
+
+# เปิด Prisma Studio
+db-studio:
+    bunx prisma studio --schema=infrastructure/prisma/schema.prisma
+
+# Reset database (dev only!)
+db-reset:
+    @echo "⚠️  This will DELETE all data!"
+    bunx prisma migrate reset --schema=infrastructure/prisma/schema.prisma
+
+# Start local postgres (Docker)
+db-local:
+    docker-compose -f infrastructure/docker/docker-compose.yml up -d postgres
+    @echo "✅ Local PostgreSQL running on port 5432"
+
+# ══════════════════════════════════════════════════════
+# BUILD
+# ══════════════════════════════════════════════════════
+
+# Build ทุก app
+build:
+    bun run build
+
+# Build web app
+build-web:
+    cd apps/web && bun run build
+
+# Build API
+build-api:
+    cd apps/api && bun run build
+
+# Build desktop app
+build-desktop:
+    cd apps/desktop && bun tauri build
+
+# ══════════════════════════════════════════════════════
+# DEPLOYMENT
+# ══════════════════════════════════════════════════════
+
+# Deploy web app ไป Vercel
+deploy-web:
+    cd apps/web && vercel deploy --prod
+
+# Deploy marketplace ไป Vercel
+deploy-marketplace:
+    cd apps/marketplace && vercel deploy --prod
+
+# Deploy API ไป Cloudflare Workers
+deploy-api:
+    cd apps/api && bunx wrangler deploy
+
+# Run db migrations แล้ว deploy API
+deploy-api-full: db-migrate-prod deploy-api
+    @echo "✅ API deployed with migrations"
+
+# ══════════════════════════════════════════════════════
+# CODE QUALITY
+# ══════════════════════════════════════════════════════
+
+# Lint ทุกอย่าง
+lint:
+    bun run lint
+
+# Format code
+format:
+    bunx biome format --write .
+
+# Type check
+typecheck:
+    bun run typecheck
+
+# Test
+test:
+    bun test
+
+# ══════════════════════════════════════════════════════
+# UTILITIES
+# ══════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════
+# WORKFLOW — งานซ้ำๆ สำหรับทีมและ AI
+# ══════════════════════════════════════════════════════
+
+wf:
+    @bash scripts/workflow.sh help
+
+todo:
+    @bash scripts/workflow.sh todo:find
+
+todo-by name:
+    @bash scripts/workflow.sh todo:by {{name}}
+
+todo-clean:
+    @bash scripts/workflow.sh todo:clean
+
+todo-export:
+    @bash scripts/workflow.sh todo:export
+
+console:
+    @bash scripts/workflow.sh console:find
+
+console-clean:
+    @bash scripts/workflow.sh console:clean
+
+dead:
+    @bash scripts/workflow.sh dead:find
+
+env-check:
+    @bash scripts/workflow.sh env:check
+
+replace old new path="apps/":
+    @bash scripts/workflow.sh replace {{old}} {{new}} {{path}}
+
+swap src dest:
+    @bash scripts/workflow.sh component:swap {{src}} {{dest}}
+
+find-file pattern:
+    @bash scripts/workflow.sh file:find {{pattern}}
+
+branch-clean:
+    @bash scripts/workflow.sh branch:clean
+
+commit msg:
+    @bash scripts/workflow.sh commit:msg {{msg}}
+
+pr:
+    @bash scripts/workflow.sh pr:ready
+
+issues:
+    @bash scripts/workflow.sh issue:list
+
+issue title:
+    @bash scripts/workflow.sh issue:create {{title}}
+
+issue-rank:
+    @bash scripts/workflow.sh issue:rank
+
+# ══════════════════════════════════════════════════════
+# Clean build artifacts
+clean:
+    rm -rf apps/*/dist apps/web/.next apps/marketplace/.next
+    rm -rf apps/api/dist
+    @echo "✅ Cleaned"
+
+# Clean + node_modules
+clean-all: clean
+    rm -rf node_modules apps/*/node_modules packages/*/node_modules
+    @echo "✅ Fully cleaned"
+
+# Generate API key สำหรับ testing
+gen-key:
+    @openssl rand -hex 32
+
+# ดู logs จาก Cloudflare Workers
+logs-api:
+    cd apps/api && bunx wrangler tail
