@@ -1,0 +1,5 @@
+category,name,version,description,tags,path,raw_url,updated_at
+workflows,rust-release.yml,1.2.0,"Universal Rust release builder with multi-platform matrix and archive packager","ci,rust,release",workflows/rust-release.yml,https://raw.githubusercontent.com/your-org/.github/main/workflows/rust-release.yml,2026-09-28
+scripts,install.sh,2.0.1,"Universal POSIX installer script for downloading release binaries to PATH","installer,bash,shell",scripts/install.sh,https://raw.githubusercontent.com/your-org/.github/main/scripts/install.sh,2026-09-28
+scripts,install.ps1,2.0.1,"PowerShell installer for Windows systems with automatic PATH registration","installer,powershell,windows",scripts/install.ps1,https://raw.githubusercontent.com/your-org/.github/main/scripts/install.ps1,2026-09-28
+configs,clippy.toml,1.0.0,"Strict production-grade Clippy lint configuration with zero warnings policy","lint,rust,clippy",configs/clippy.toml,https://raw.githubusercontent.com/your-org/.github/main/configs/clippy.toml,2026-09-28
