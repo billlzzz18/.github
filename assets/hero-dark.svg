@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" font-family="Inter,'Segoe UI','Noto Sans Thai',Helvetica,Arial,sans-serif">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B0820"/><stop offset="1" stop-color="#1B1258"/></linearGradient>
+<linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B6CFF"/><stop offset="1" stop-color="#C9BCFF"/></linearGradient>
+<linearGradient id="win" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A2080"/><stop offset="1" stop-color="#100B38"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient>
+<linearGradient id="cA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B84FF"/><stop offset="1" stop-color="#4B2FE0"/></linearGradient>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="55"/></filter>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#5B3DF5" flood-opacity=".45"/></filter>
+<clipPath id="r"><rect width="1200" height="460" rx="28"/></clipPath>
+</defs>
+<g clip-path="url(#r)">
+<rect width="1200" height="460" fill="url(#bg)"/>
+<circle cx="980" cy="90" r="170" fill="#6D4AFF" opacity=".60" filter="url(#blur)"/>
+<circle cx="150" cy="470" r="200" fill="#3B2BB5" opacity=".60" filter="url(#blur)"/>
+<circle cx="640" cy="440" r="140" fill="#6D4AFF" opacity=".25" filter="url(#blur)"/>
+<g transform="translate(655 120) rotate(-8)"><rect width="420" height="250" rx="22" fill="url(#glass)" stroke="#fff" stroke-opacity=".5"/></g>
+<g transform="translate(690 78) rotate(-5)" filter="url(#sh)">
+<rect width="430" height="260" rx="20" fill="url(#win)" stroke="#C9BCFF" stroke-opacity=".7" stroke-width="1.5"/>
+<circle cx="26" cy="26" r="6" fill="#FF5F57"/><circle cx="46" cy="26" r="6" fill="#FEBC2E"/><circle cx="66" cy="26" r="6" fill="#28C840"/>
+<rect x="34" y="58" width="120" height="8" rx="4" fill="#8B6CFF" opacity=".85"/><rect x="34" y="78" width="200" height="8" rx="4" fill="#5EA8FF" opacity=".85"/><rect x="52" y="98" width="160" height="8" rx="4" fill="#C9BCFF" opacity=".85"/><rect x="52" y="118" width="230" height="8" rx="4" fill="#7C5CFF" opacity=".85"/><rect x="70" y="138" width="140" height="8" rx="4" fill="#5EA8FF" opacity=".85"/><rect x="70" y="158" width="190" height="8" rx="4" fill="#8B6CFF" opacity=".85"/><rect x="52" y="178" width="110" height="8" rx="4" fill="#C9BCFF" opacity=".85"/><rect x="34" y="198" width="170" height="8" rx="4" fill="#7C5CFF" opacity=".85"/><rect x="34" y="218" width="90" height="8" rx="4" fill="#5EA8FF" opacity=".85"/>
+</g>
+<g transform="translate(1100 82)">
+<polygon points="0,-46 44,-22 0,2 -44,-22" fill="#C9BCFF"/>
+<polygon points="-44,-22 0,2 0,54 -44,30" fill="url(#cA)"/>
+<polygon points="44,-22 0,2 0,54 44,30" fill="#5B3DF5"/>
+</g>
+<g transform="translate(960 232)"><rect width="216" height="38" rx="19" fill="url(#glass)" stroke="#fff" stroke-opacity=".5"/>
+<circle cx="20" cy="19" r="5" fill="#8B6CFF"/><text x="34" y="25" font-size="14" fill="#FFFFFF">Design. Develop. Deploy.</text></g>
+<text x="60" y="118" font-size="28" font-weight="500" fill="#FFFFFF">Hi, I'm</text>
+<text x="56" y="196" font-size="76" font-weight="800" fill="#FFFFFF" letter-spacing="-2">Build. Create.</text>
+<text x="56" y="272" font-size="76" font-weight="800" fill="url(#acc)" letter-spacing="-2">Iterate.</text>
+<text x="60" y="318" font-size="21" fill="#B9B4E0">นักพัฒนาและครีเอทีฟ ที่หลงใหลในการสร้างสิ่งใหม่</text><text x="60" y="348" font-size="21" fill="#B9B4E0">ด้วยเทคโนโลยีและความคิดสร้างสรรค์</text>
+<rect x="60" y="388" width="200" height="48" rx="24" fill="#7C5CFF"/>
+<text x="160" y="418" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Explore My Work  →</text>
+<rect x="276" y="388.75" width="150" height="46.5" rx="23.25" fill="none" stroke="#FFFFFF" stroke-opacity=".3"/>
+<text x="351" y="418" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="middle">Learn More</text>
+</g></svg>

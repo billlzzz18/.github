@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 96" width="1200" height="96" font-family="Inter,'Segoe UI','Noto Sans Thai',Helvetica,Arial,sans-serif">
+<defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B6CFF"/><stop offset="1" stop-color="#C9BCFF" stop-opacity="0"/></linearGradient></defs>
+<text x="4" y="28" font-size="18" font-weight="600" fill="#8B6CFF">Get in Touch</text>
+<rect x="138" y="22" width="90" height="2" fill="url(#a)"/>
+<text x="2" y="76" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Let's Work Together</text></svg>
